@@ -4,7 +4,18 @@ RPN.Net is a .NET library for Reverse Polish Notation (RPN).
 A easy way to include external logic into your projects.
 
 ## Installation
-RPN.Net can be installed via [NuGet Package](https://www.nuget.org/packages/RPN.Net/)
+RPN.Net can be installed directly from [NuGet Package](https://www.nuget.org/packages/RPN.Net/).
+
+To install, run the following command in the Package Manager Console
+
+```
+PM> Install-Package RPN.Net
+```
+Or at .NET CLI
+
+```
+> dotnet add package RPN.Net
+```
 
 ## Usage
 
