@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Text.Json;
 
-namespace RPN
+namespace RPN.Helpers
 {
-    public static class JsonHelper
+    internal static class JsonHelper
     {
         public static dynamic Parse(string json)
         {

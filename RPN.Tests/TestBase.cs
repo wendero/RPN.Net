@@ -11,12 +11,12 @@ namespace RPN.Tests
         }
         public void Test(string name, string exp, dynamic expected, params object[] objects)
         {
-            string strVal = "";
-            bool status = false;
+            string strVal;
+            bool status;
 
             try
             {
-                var val = RPN.Eval(exp, objects);
+                var val = RPN.Evaluate(new RPNExpression(exp, objects));
                 strVal = val.ToString();
                 status = expected == val;
 
