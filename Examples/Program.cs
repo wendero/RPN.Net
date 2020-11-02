@@ -18,7 +18,7 @@ namespace RPN.Examples
             }
             var expression = string.Join(' ', args);
             
-            Console.WriteLine(RPN.Eval(expression, null));
+            Console.WriteLine(RPN.Evaluate(expression, null));
         }
         static void ShowExamples()
         {
@@ -176,7 +176,7 @@ namespace RPN.Examples
 
             try
             {
-                var val = RPN.Eval(exp, objects);
+                var val = RPN.Evaluate(exp, objects);
                 strVal = val.ToString();
                 status = expected == val;
 
@@ -191,7 +191,7 @@ namespace RPN.Examples
         }
         static void Summary()
         {
-            var rate = RPN.Eval("$0 $1 perc", _total, _success);
+            var rate = RPN.Evaluate("$0 $1 perc", _total, _success);
             var summary = $"Summary: Total: {_total}, Success: {_success}, Failures: {_total - _success}, Success Rate: {rate}%";
 
             Console.WriteLine("".PadLeft(80, '*'));
