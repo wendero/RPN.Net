@@ -9,7 +9,7 @@ namespace RPN.Evaluators
 {
     internal class StringEvaluator
     {
-        private static string[] OPERATORS = new string[] { "ucase", "lcase", "strfmt", "todate", "date", "stringify", "parse" };
+        private static string[] OPERATORS = new string[] { "ucase", "lcase", "strfmt", "datefmt", "stringify", "parse", "str" };
 
         internal static bool Evaluate(RPNContext context)
         {
@@ -49,41 +49,48 @@ namespace RPN.Evaluators
                             context.Stack.Push(value);
                         }
                         break;
-                    case "todate":
+                    case "datefmt":
                         {
-                            var format = context.Stack.Pop().ToString();
-                            var value = context.Stack.Pop().ToString();
+                            var temp = context.Stack.Pop();
+                            dynamic value;
+                            string format = null;
 
-                            DateTime date = Convert.ToDateTime(value);
-                            var newFormat = format == "default" ? "yyyy-MM-dd HH:mm:ss" : format;
+                            if (temp is DateTime)
+                            {
+                                value = temp;
+                            }
+                            else
+                            {
+                                format = temp;
+                                value = context.Stack.Pop();
+                            }
 
-                            context.Stack.Push(date.ToString(newFormat));
+                            DateTime date = value is DateTime ? value : Convert.ToDateTime(value.ToString());
+                            context.Stack.Push(ConvertDateTimeToString(date, format));
                         }
                         break;
-                    case "date":
+                    case "str":
                         {
-                            var len = context.Stack.Pop();
-                            var parts = new List<int>();
-                            for (var i = 0; i < len; i++)
-                                parts.Add(Convert.ToInt32(context.Stack.Pop()));
-                            parts.Reverse();
-
-                            DateTime date = new DateTime();
-                            date = date.AddYears(parts.Count > 0 ? parts[0] - 1 : 0);
-                            date = date.AddMonths(parts.Count > 1 ? parts[1] - 1 : 0);
-                            date = date.AddDays(parts.Count > 2 ? parts[2] - 1 : 0);
-                            date = date.AddHours(parts.Count > 3 ? parts[3] : 0);
-                            date = date.AddMinutes(parts.Count > 4 ? parts[4] : 0);
-                            date = date.AddSeconds(parts.Count > 5 ? parts[5] : 0);
-                            date = date.AddMilliseconds(parts.Count > 6 ? parts[6] : 0);
-
-                            context.Stack.Push(date.ToString());
-                            break;
+                            var value = context.Stack.Pop();
+                            if (value is DateTime)
+                            {
+                                context.Stack.Push(ConvertDateTimeToString(value));
+                            }
+                            else
+                            {
+                                context.Stack.Push(value.ToString());
+                            }
                         }
+                        break;
                 }
                 return true;
             }
             return false;
+        }
+        private static string ConvertDateTimeToString(DateTime dateTime, string format = null)
+        {
+            var newFormat = format == "default" ? "yyyy-MM-dd HH:mm:ss" : format;
+            return dateTime.ToString(newFormat);
         }
     }
 }

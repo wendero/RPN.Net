@@ -120,10 +120,23 @@ Once RPN uses the whitespace character to split its stack items, a string with w
 | Uppercase | ucase | Set a string as uppercase | bazinga ucase | BAZINGA |
 | Lowercase | lcase | Set a string as lowercase | BAZINGA lcase | bazinga |
 | String Format | strfmt | Format a string based on a format string where positions are set between {} | hel wor lo ld \`{0}{2} {1}{3}\` strfmt | hello world |
-Date | date | Convert a set of *n*, where *n* is between 1 and 7, stack items into Datetime | 2018 12 31 23 59 58 123 7 date | Create the datetime object for 2018-12-31 23:59:58.123 |
-Date Format | todate | Convert a date object into a specific string format: <br> dd(day), MM(month), yyyy(year) HH(hours), mm(minutes), ss(seconds) fffff(seconds decimals) or default for yyyy-MM-dd HH:mm:ss.fff | 2018 12 31 23 59 58 123 7 date \`dd/MM/yyyy HH:mm:ss\` todate | 31/12/2018 23:59:58 |
+| Date Format | todate | Convert a date object into a specific string format: <br> dd(day), MM(month), yyyy(year) HH(hours), mm(minutes), ss(seconds) fffff(seconds decimals) or default for yyyy-MM-dd HH:mm:ss.fff | 2018 12 31 23 59 58 123 7 date \`dd/MM/yyyy HH:mm:ss\` todate | 31/12/2018 23:59:58 |
 | Stringify | stringify | Serializes a parameter into a JSON string | $0 stringify | $0 JSON |
 | Parse JSON | parse | Parses a JSON into a object and store it | \`{"Name": "Bazinga"}\` parse | Stores a object parameter $0 into Data list with with property *Name* of value *Bazinga* |
+
+## Date and Time Operations
+| Operation | Operator | Description | Example | Result |
+| --- |:---:| --- | --- | ---:|
+| Date | date | Convert a set of *n*, where *n* is between 1 and 7, stack items into Datetime | 2018 12 31 23 59 58 123 7 date | Create the datetime object for 2018-12-31 23:59:58.123 |
+| Years TimeSpan | year/years | Convert a value into a year(s) TimeSpan | 3 years | 3 years Extended TimeSpan |
+| Months TimeSpan | month/months | Convert a value into a month(s) TimeSpan | 3 months | 3 months Extended TimeSpan |
+| Days TimeSpan | day/days | Convert a value into a day(s) TimeSpan | 3 days | 3 days TimeSpan |
+| Hours TimeSpan | hour/hours | Convert a value into a hour(s) TimeSpan | 3 hours | 3 hours TimeSpan |
+| Minutes TimeSpan | minute/minutes | Convert a value into a minute(s) TimeSpan | 3 minutes | 3 minutes TimeSpan |
+| Seconds TimeSpan | second/seconds | Convert a value into a second(s) TimeSpan | 3 seconds | 3 seconds TimeSpan |
+| Full TimeSpan | ts | Convert a set of 4 integer values into a TimeSpan (day, hour, minute, second) | 3 5 7 9 ts | 3 days 5 hours 7 minutes and 9 seconds TimeSpan |
+| DateTime Sum | + | Sums a TimeSpan or Extended TimeSpan with a Date Time value | 2020 1 date 1 hour + | Date Time object 2020-01-01 01:00:00 |
+| DateTime Subtraction | - | Subtracts a TimeSpan or Extended TimeSpan with a Date Time value | 2020 1 date 1 hour - | Date Time object 2019-12-31 23:00:00 |
 
 ## Control Operations
 | Operation | Operator | Description | Example | Result |

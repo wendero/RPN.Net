@@ -12,6 +12,12 @@ namespace RPN.Evaluators
         {
             if (OPERATORS.Contains(context.Current))
             {
+                if (context.Stack.First() is TimeSpan ||
+                    context.Stack.First() is ExtendedTimeSpan)
+                {
+                    return false;
+                }
+
                 switch (context.Current)
                 {
                     case "+":

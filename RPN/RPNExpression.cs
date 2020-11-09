@@ -7,7 +7,7 @@ namespace RPN
 
         public RPNExpression(string expression, params object[] parameters)
         {
-            this.Expression = expression;
+            this.Expression = expression.Trim();
             this.Parameters = parameters;
         }
         public RPNExpression(string expression) : this(expression, null) { }

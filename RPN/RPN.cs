@@ -20,11 +20,16 @@ namespace RPN
                     if (MathEvaluator.Evaluate(context)) continue;
                     if (LogicEvaluator.Evaluate(context)) continue;
                     if (StringEvaluator.Evaluate(context)) continue;
+                    if (DateTimeEvaluator.Evaluate(context)) continue;
                     if (ControlEvaluator.Evaluate<T>(context)) continue;
 
                     context.Stack.Push(context.Current);
                 }
                 return context.GetResult<T>();
+            }
+            catch(RPNException)
+            {
+                throw;
             }
             catch
             {

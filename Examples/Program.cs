@@ -17,7 +17,7 @@ namespace RPN.Examples
                 return;
             }
             var expression = string.Join(' ', args);
-            
+
             Console.WriteLine(RPN.Evaluate(expression, null));
         }
         static void ShowExamples()
@@ -89,12 +89,35 @@ namespace RPN.Examples
             Test("Uppercase", "bazinga ucase", "BAZINGA");
             Test("Lowercase", "BAZINGA lcase", "bazinga");
             Test("String Format", "hel wor lo ld `{0}{2} {1}{3}` strfmt", "hello world");
-            Test("Date Default Format", "2018 12 31 23 59 58 123 7 date default todate", "2018-12-31 23:59:58");
-            Test("Date Custom Format", "2018 12 31 23 59 58 123 7 date yyyy-MM-dd todate", "2018-12-31");
+            Test("Date Default Format", "2020 12 31 15 16 17 6 date default datefmt","2020-12-31 15:16:17");
+            Test("Date Custom Format", "2020 12 31 15 16 17 6 date `dd/MM/yyyy HH:mm:ss` datefmt","31/12/2020 15:16:17");
+            Test("Date System Format", "2018 12 31 23 59 58 123 7 date str", new DateTime(2018, 12, 31, 23, 59, 58).ToString());
             Test("Parse JSON", "`{\"Name\": \"Bazinga\"}` parse $0.Name", "Bazinga");
             Test("Parse JSON", "`{\"Key\":123}` parse $0.Key", 123);
-            Test("Date System Format", "2018 12 31 23 59 58 123 7 date", new DateTime(2018, 12, 31, 23, 59, 58).ToString());
             Test("Stringify", "$0 stringify", JsonSerializer.Serialize(new { Name = "Bazinga" }), new { Name = "Bazinga" });
+
+            /******************************************/
+            /** DATETIME OPERATIONS
+            /******************************************/
+            Test("Date Year", "2020 1 date default datefmt", "2020-01-01 00:00:00", null);
+            Test("Date Year and Month", "2020 12 2 date default datefmt", "2020-12-01 00:00:00", null);
+            Test("Date Simple", "2020 12 31 3 date default datefmt", "2020-12-31 00:00:00", null);
+            Test("Date", "2020 12 31 15 16 17 6 date", new DateTime(2020, 12, 31, 15, 16, 17), null);
+            Test("TimeSpan 3 days", "3 days", new TimeSpan(3, 0, 0, 0), null);
+            Test("TimeSpan 5 hours", "5 hours", new TimeSpan(0, 5, 0, 0), null);
+            Test("TimeSpan 7 minutes", "7 minutes", new TimeSpan(0, 0, 7, 0), null);
+            Test("TimeSpan 9 seconds", "9 seconds", new TimeSpan(0, 0, 0, 9), null);
+            Test("TimeSpan full", "3 5 7 9 ts", new TimeSpan(3, 5, 7, 9), null);
+            Test("Add 1 hour", "2020 1 date 1 hour +", new DateTime(2020, 1, 1, 1, 0, 0), null);
+            Test("Add 1 day", "2020 1 date 1 day +", new DateTime(2020, 1, 2), null);
+            Test("Subtract 1 hour", "2020 1 date 1 hour -", new DateTime(2019, 12, 31, 23, 0, 0), null);
+            Test("Subtract 1 day", "2020 1 date 1 day -", new DateTime(2019, 12, 31), null);
+            Test("Add 1 month", "2020 1 date 1 month +", new DateTime(2020, 2, 1), null);
+            Test("Add 1 year", "2020 1 date 1 year +", new DateTime(2021, 1, 1), null);
+            Test("Add 2 months", "2020 1 date 2 months +", new DateTime(2020, 3, 1), null);
+            Test("Add 2 years", "2020 1 date 2 years +", new DateTime(2022, 1, 1), null);
+            Test("Subtract 1 month", "2020 1 date 1 month -", new DateTime(2019, 12, 1), null);
+            Test("Subtract 1 year", "2020 1 date 1 year -", new DateTime(2019, 1, 1), null);
 
             /******************************************/
             /** TRIGONOMETRIC OPERATIONS
@@ -181,13 +204,15 @@ namespace RPN.Examples
                 status = expected == val;
 
                 if (status) _success++;
+
+                Console.WriteLine($"{name} => RPN: {exp} :: Expected: {expected} :: Value: {strVal} :: Test: {(status ? "PASS" : "FAIL")}");
             }
-            catch
+            catch (Exception e)
             {
-                throw;
+                Console.WriteLine($"{name} => RPN: {exp} :: Expected: {expected} :: Value: EXCEPTION :: Test: FAIL");
+                Console.WriteLine($"          {e.Message}");
             }
 
-            Console.WriteLine($"{name} => RPN: {exp} :: Expected: {expected} :: Value: {strVal} :: Test: {(status ? "PASS" : "FAIL")}");
         }
         static void Summary()
         {
