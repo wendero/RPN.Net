@@ -13,8 +13,8 @@ namespace RPN.Tool
             var rootCommand = new RootCommand
             {
                 new Argument<string>("expression", "RPN expression to be evaluated"),
-                new Option<List<string>>(new string[] {"p", "parameters"}, description: "List of parameters (primitive or json)"),
-                new Option<List<FileInfo>>(new string[] {"f", "files"}, description: "Files to be appended to parameters") { AllowMultipleArgumentsPerToken = false }
+                new Option<List<string>>(new string[] {"-p", "--parameters"}, description: "List of parameters (primitive or json)"),
+                new Option<List<FileInfo>>(new string[] {"-f", "--files"}, description: "Files to be appended to parameters list"),
             };
 
             rootCommand.Description = "RPN Evaluator based on RPN.Net";
@@ -33,7 +33,6 @@ namespace RPN.Tool
                 Console.WriteLine(val);
             });
 
-            // Parse the incoming args and invoke the handler
             rootCommand.InvokeAsync(args);
         }
     }

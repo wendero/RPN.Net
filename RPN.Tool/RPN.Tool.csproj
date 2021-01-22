@@ -16,11 +16,19 @@
   <!-- Dotnet Tool Specific settings -->
   <PropertyGroup>
     <PackAsTool>true</PackAsTool>
-    <PackageId>rpn-tool</PackageId>
+    <PackageId>RPN.Tool</PackageId>
     <ToolCommandName>rpn</ToolCommandName>
 
     <PackageOutputPath>./nupkg</PackageOutputPath>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Wender Oliveira</Authors>
+    <Company>Wender Oliveira</Company>
+    <Description>RPN.Tool is a RPN Evaluator based on RPN.Net</Description>
+    <Copyright>Copyright © Wender Oliveira 2021</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/wendero/RPN.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/wendero/RPN.Net</RepositoryUrl>
+    <PackageTags>rpn c# dotnet core tool</PackageTags>
   </PropertyGroup>
 
 </Project>
