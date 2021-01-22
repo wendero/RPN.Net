@@ -197,7 +197,11 @@ namespace RPN.Examples
             Test("Collection", "$0", mockList, mockList);
             Test("Spread", "$0 Num ... sum", 17, mockList);
 
-
+            /******************************************/
+            /** REGEX OPERATIONS
+            /******************************************/
+            Test("Regex Match", @"`telefone: 371-8333 555-8888 321-4001 bazinga` rx/\d{3}\-\d{4}/ match $0[0].Value", "371-8333");
+            
             Summary();
         }
         static void Test(string name, string exp, dynamic expected)

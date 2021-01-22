@@ -11,6 +11,7 @@ namespace RPN.Evaluators
         {
             return EvaluateNumber(context)
                 || EvaluateBoolean(context)
+                || EvaluateRegex(context)
                 || EvaluateString(context)
                 || EvaluateFunction(context)
                 || EvaluateObject(context);
@@ -42,6 +43,31 @@ namespace RPN.Evaluators
             if (context.Current == "true" || context.Current == "false")
             {
                 context.Stack.Push(Convert.ToBoolean(context.Current));
+                return true;
+            }
+            return false;
+        }
+        static bool EvaluateRegex(RPNContext context)
+        {
+            if (context.Current.StartsWith("rx/"))
+            {
+                var values = new List<string>();
+                var current = context.Current.Remove(0, 3);
+
+                while (context.CurrentIndex < context.Values.Count)
+                {
+                    if (current.EndsWith("/"))
+                    {
+                        current = current.TrimEnd('/');
+                        values.Add(current);
+                        var join = string.Join(" ", values);
+                        context.Stack.Push(join);
+                        break;
+                    }
+                    values.Add(current);
+                    context.MoveNext();
+                    current = context.Current;
+                }
                 return true;
             }
             return false;
