@@ -9,7 +9,7 @@ namespace RPN.Evaluators
 {
     internal class StringEvaluator
     {
-        private static string[] OPERATORS = new string[] { "ucase", "lcase", "strfmt", "datefmt", "stringify", "parse", "str" };
+        private static string[] OPERATORS = new string[] { "ucase", "lcase", "strfmt", "datefmt", "stringify", "parse", "str", "line", "lines" };
 
         internal static bool Evaluate(RPNContext context)
         {
@@ -82,6 +82,21 @@ namespace RPN.Evaluators
                             }
                         }
                         break;
+                    case "line":
+                        {
+                            var lineNumber = Convert.ToInt32(context.Stack.Pop()) - 1;
+                            var value = context.Stack.Pop();
+                            var allLines = value.ToString().Split(Environment.NewLine);
+                            context.Stack.Push(allLines[lineNumber]);
+                            break;
+                        }
+                    case "lines":
+                        {
+                            var value = context.Stack.Pop();
+                            var allLines = value.ToString().Split(Environment.NewLine);
+                            context.Stack.Push(allLines.Length);
+                            break;
+                        }
                 }
                 return true;
             }

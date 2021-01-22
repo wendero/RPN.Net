@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 using RPN.Exceptions;
+using RPN.Helpers;
 
 namespace RPN
 {
@@ -38,10 +41,28 @@ namespace RPN
 
             if (this.Expression.Parameters != null)
             {
-                this.Data.AddRange(this.Expression.Parameters);
+                this.Expression.Parameters.ToList().ForEach(parameter =>
+                {
+                    this.Data.Add(ParseParameter(parameter));
+                });
             }
 
             this.Values.AddRange(this.Expression.Expression.Split(' '));
+        }
+        internal dynamic ParseParameter(object parameter)
+        {
+            if(parameter is string && parameter.ToString().StartsWith("{"))
+            {
+                try
+                {
+                    return JsonHelper.Parse(parameter.ToString());
+                }
+                catch
+                {
+                    return parameter.ToString();
+                }
+            }
+            return parameter;
         }
         private void Validate()
         {

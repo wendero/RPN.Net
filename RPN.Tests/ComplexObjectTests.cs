@@ -23,6 +23,7 @@ namespace RPN.Tests
             Test("Single Parameter", "$0.Num 1 +", 3, new { Num = 2 });
             Test("Single Parameter from Object", "$0.Num", 5, new Mock { Num = 5 });
             Test("Single Parameter from Multiple Objects", "$0.Num $1.Num +", 8, new Mock { Num = 5 }, new Mock { Num = 3 });
+            Test("Single Json String Parameter", "$0.Num 1 +", 3, "{ \"Num\": 2 }");
         }
         [Test]
         public void TestMultipleParametersFromMultipleObjects()
