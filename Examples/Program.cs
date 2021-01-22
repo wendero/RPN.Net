@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 
 namespace RPN.Examples
@@ -96,6 +97,16 @@ namespace RPN.Examples
             Test("Parse JSON", "`{\"Key\":123}` parse $0.Key", 123);
             Test("Stringify", "$0 stringify", JsonSerializer.Serialize(new { Name = "Bazinga" }), new { Name = "Bazinga" });
 
+            var builder = new StringBuilder();
+            builder.AppendLine("line 1");
+            builder.AppendLine("line 2");
+            builder.AppendLine("line 3");
+            builder.AppendLine("line 4");
+            builder.AppendLine("line 5");
+
+            Test("Test Line Count", "$0 lines", 6, builder.ToString());
+            Test("Test Line Get", "$0 3 line", "line 3", builder.ToString());
+
             /******************************************/
             /** DATETIME OPERATIONS
             /******************************************/
@@ -173,6 +184,7 @@ namespace RPN.Examples
             Test("Single Parameter", "$0.Num 1 +", 3, new { Num = 2 });
             Test("Single Parameter from Object", "$0.Num", 5, new Mock { Num = 5 });
             Test("Single Parameter from Multiple Objects", "$0.Num $1.Num +", 8, new Mock { Num = 5 }, new Mock { Num = 3 });
+            Test("Single Json String Parameter", "$0.Num 1 +", 3, "{ \"Num\": 2 }");
             Test("Multiple Parameters", "$0.Num $1.Num min", 2, new { Num = 2 }, new { Num = 5 });
             Test("Multiple Parameters", "$0 $1 +", 5, 2, 3);
             Test("Array Item", "$0[0] $0[1] +", 5, new int[] { 2, 3 });
@@ -185,6 +197,11 @@ namespace RPN.Examples
             Test("Collection", "$0", mockList, mockList);
             Test("Spread", "$0 Num ... sum", 17, mockList);
 
+            /******************************************/
+            /** REGEX OPERATIONS
+            /******************************************/
+            Test("Regex Match", @"`telefone: 371-8333 555-8888 321-4001 bazinga` rx/\d{3}\-\d{4}/ match $0[0].Value", "371-8333");
+            
             Summary();
         }
         static void Test(string name, string exp, dynamic expected)

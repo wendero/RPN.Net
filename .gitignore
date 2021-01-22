@@ -3,3 +3,5 @@
 */obj/**
 **/.vscode/**
 **/.vs/**
+nupkg/
+/RPN.Tool/Properties/launchSettings.json

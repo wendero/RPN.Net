@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20574.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RPN\RPN.csproj" />
+  </ItemGroup>
+
+  <!-- Dotnet Tool Specific settings -->
+  <PropertyGroup>
+    <PackAsTool>true</PackAsTool>
+    <PackageId>RPN.Tool</PackageId>
+    <ToolCommandName>rpn</ToolCommandName>
+
+    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Wender Oliveira</Authors>
+    <Company>Wender Oliveira</Company>
+    <Description>RPN.Tool is a RPN Evaluator based on RPN.Net</Description>
+    <Copyright>Copyright © Wender Oliveira 2021</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/wendero/RPN.Net</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/wendero/RPN.Net</RepositoryUrl>
+    <PackageTags>rpn c# dotnet core tool</PackageTags>
+  </PropertyGroup>
+
+</Project>

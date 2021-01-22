@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Text.Json;
 using NUnit.Framework;
 
@@ -31,6 +32,19 @@ namespace RPN.Tests
         {
             var json = JsonSerializer.Serialize(new { Name = "Bazinga" });
             Test("Stringify", "$0 stringify", json, new { Name = "Bazinga" });
+        }
+        [Test]
+        public void TestLineOperations()
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine("line 1");
+            builder.AppendLine("line 2");
+            builder.AppendLine("line 3");
+            builder.AppendLine("line 4");
+            builder.AppendLine("line 5");
+
+            Test("Test Line Count", "$0 lines", 6, builder.ToString());
+            Test("Test Line Get", "$0 3 line", "line 3", builder.ToString());
         }
     }
 }
