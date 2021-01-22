@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPN.Tests", "RPN.Tests\RPN.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Examples", "Examples\Examples.csproj", "{574B29D6-D2D7-4495-8727-B942BE535510}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RPN.Tool", "RPN.Tool\RPN.Tool.csproj", "{899C1D05-62CA-4E48-B29E-18875923F693}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{574B29D6-D2D7-4495-8727-B942BE535510}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{574B29D6-D2D7-4495-8727-B942BE535510}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{574B29D6-D2D7-4495-8727-B942BE535510}.Release|Any CPU.Build.0 = Release|Any CPU
+		{899C1D05-62CA-4E48-B29E-18875923F693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{899C1D05-62CA-4E48-B29E-18875923F693}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{899C1D05-62CA-4E48-B29E-18875923F693}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{899C1D05-62CA-4E48-B29E-18875923F693}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
