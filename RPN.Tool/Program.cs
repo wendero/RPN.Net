@@ -21,6 +21,27 @@ namespace RPN.Tool
 
             rootCommand.Handler = CommandHandler.Create<string, List<string>, List<FileInfo>>((expression, parameters, files) =>
             {
+                List<object> parsedParameters = ParseParameters(parameters, files);
+                try
+                {
+                    var val = (RPN.Evaluate(new RPNExpression(expression, parsedParameters.ToArray())).ToString());
+                    Console.WriteLine(val);
+                    Environment.Exit(0);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Environment.Exit(1);
+                }
+            });
+
+            rootCommand.InvokeAsync(args);
+        }
+
+        private static List<object> ParseParameters(List<string> parameters, List<FileInfo> files)
+        {
+            try
+            {
                 var parsedParameters = new List<object>();
                 parsedParameters.AddRange(parameters);
 
@@ -28,12 +49,14 @@ namespace RPN.Tool
                 {
                     parsedParameters.Add(file.OpenText().ReadToEnd());
                 });
-
-                var val = (RPN.Evaluate(new RPNExpression(expression, parsedParameters.ToArray())).ToString());
-                Console.WriteLine(val);
-            });
-
-            rootCommand.InvokeAsync(args);
+                return parsedParameters;
+            }
+            catch
+            {
+                Console.WriteLine("ERROR: Error parsing parameters");
+                Environment.Exit(2);
+                return null;
+            }
         }
     }
 }
