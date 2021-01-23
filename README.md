@@ -195,8 +195,7 @@ Dictionary parameters can have its items retrieved by set the dictionary key bet
 
 Regex Evaluator features are being analyzed. For now it only supports the *match* operator wich will add a *System.Text.RegularExpressions.MatchCollection* into Data list. After its evaluation, it can be accessed as any data object like *$0[0].Value*.
 
-<code>Console.WriteLine(RPN.Evaluate(@"`Phones: 555-1234, 321-4001 and 667-9898` rx/\d{3}\-\d{4}/ match $0
-[0].Value $0[1].Value $0[2].Value `First: {0} Second: {1} Third: {2}` strfmt"));</code>
+<code>Console.WriteLine(RPN.Evaluate(@"`Phones: 555-1234, 321-4001 and 667-9898` rx/\d{3}\-\d{4}/ match $0[0].Value $0[1].Value $0[2].Value `First: {0} Second: {1} Third: {2}` strfmt"));</code>
 
 *Output:*
 
