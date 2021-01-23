@@ -22,20 +22,20 @@ Or at .NET CLI
 ### Full Evaluation
 Full Evaluation function is able to process a full expression at once and returns its value:
 
-<code>Console.WriteLine(RPN.Eval("3 5 * 2 / 7.5 + 15 / 1 =="));</code>
+<code>Console.WriteLine(RPN.Evaluate("3 5 * 2 / 7.5 + 15 / 1 =="));</code>
 
 *Output:*
 
 <code>true</code>
 
-### Single Evaluation
+<!-- ### Single Evaluation
 Single Evaluation will process just the latest operation and return the resultant stack with all values (not operations):
 
 <code>Console.WriteLine(RPN.Stack("5 5 2 *"));</code>
 
 *Output:*
 
-<code>[ 5, 10 ]</code>
+<code>[ 5, 10 ]</code> -->
 
 ## Basic Operations
 | Operation | Operator | Description | Example | Result |
@@ -123,6 +123,8 @@ Once RPN uses the whitespace character to split its stack items, a string with w
 | Date Format | todate | Convert a date object into a specific string format: <br> dd(day), MM(month), yyyy(year) HH(hours), mm(minutes), ss(seconds) fffff(seconds decimals) or default for yyyy-MM-dd HH:mm:ss.fff | 2018 12 31 23 59 58 123 7 date \`dd/MM/yyyy HH:mm:ss\` todate | 31/12/2018 23:59:58 |
 | Stringify | stringify | Serializes a parameter into a JSON string | $0 stringify | $0 JSON |
 | Parse JSON | parse | Parses a JSON into a object and store it | \`{"Name": "Bazinga"}\` parse | Stores a object parameter $0 into Data list with with property *Name* of value *Bazinga* |
+| Line Count | lines | Count lines in a string | $0 lines | *number of lines* |
+| Line Get | line | Retrieve a specific line from a string | $0 3 line | *content of line 3* |
 
 ## Date and Time Operations
 | Operation | Operator | Description | Example | Result |
@@ -188,3 +190,14 @@ For arrays there is also the **spread operator** that will get the same property
 Dictionary parameters can have its items retrieved by set the dictionary key between []:
 
 ```$0[a] $0[b] +``` is the sum  of item *a* and item *b* of a dictionary parameter $0
+
+## Regex Operations
+
+Regex Evaluator features are being analyzed. For now it only supports the *match* operator wich will add a *System.Text.RegularExpressions.MatchCollection* into Data list. After its evaluation, it can be accessed as any data object like *$0[0].Value*.
+
+<code>Console.WriteLine(RPN.Evaluate(@"`Phones: 555-1234, 321-4001 and 667-9898` rx/\d{3}\-\d{4}/ match $0
+[0].Value $0[1].Value $0[2].Value `First: {0} Second: {1} Third: {2}` strfmt"));</code>
+
+*Output:*
+
+<code>First: 555-1234 Second: 321-4001 Third: 667-9898</code>
