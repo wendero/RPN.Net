@@ -11,12 +11,11 @@
 A easy way to include external logic into your projects.</Description>
     <PackageProjectUrl>https://github.com/wendero/RPN.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wendero/RPN.Net</RepositoryUrl>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <Copyright>Copyright © Wender Oliveira 2021</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>rpn c# dotnet core</PackageTags>
-    <PackageReleaseNotes>- Added Date and Time operations
-- Minor changes and bug fixes</PackageReleaseNotes>
+    <PackageReleaseNotes>- Added percd and percf operations</PackageReleaseNotes>
     <AssemblyVersion>1.3.0.0</AssemblyVersion>
     <FileVersion>1.3.0.0</FileVersion>
   </PropertyGroup>

@@ -6,7 +6,7 @@ namespace RPN.Evaluators
 {
     internal class BasicEvaluator
     {
-        private static string[] OPERATORS = new string[] { "+", "-", "*", "/", "%", "perc" };
+        private static string[] OPERATORS = new string[] { "+", "-", "*", "/", "%", "perc", "percf", "percd" };
 
         internal static bool Evaluate(RPNContext context)
         {
@@ -59,13 +59,35 @@ namespace RPN.Evaluators
                         {
                             var x = context.Stack.Pop();
                             var y = context.Stack.Pop();
-                            context.Stack.Push(Math.Round(Convert.ToDouble(100 * x / y), 0));
+                            var perc = GetPercentage(x, y);
+                            context.Stack.Push(Math.Round(Convert.ToDouble(100 * perc), 0));
+                        }
+                        break;
+                    case "percd":
+                        {
+                            int d = Convert.ToInt32(context.Stack.Pop());
+                            double x = context.Stack.Pop();
+                            double y = context.Stack.Pop();
+                            double perc = GetPercentage(x, y);
+                            context.Stack.Push(Math.Round(100 * perc, d));
+                        }
+                        break;
+                    case "percf":
+                        {
+                            var x = context.Stack.Pop();
+                            var y = context.Stack.Pop();
+                            var perc = GetPercentage(x, y);
+                            context.Stack.Push(perc);
                         }
                         break;
                 }
                 return true;
             }
             return false;
+        }
+        private static double GetPercentage(double value, double totalValue)
+        {
+            return value / totalValue;
         }
     }
 }

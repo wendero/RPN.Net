@@ -1,5 +1,6 @@
 # RPN.Net
 RPN.Net is a .NET library for Reverse Polish Notation (RPN). 
+<bazinga line-height="0.8266" line-width="12.34">
 
 A easy way to include external logic into your projects.
 
@@ -47,6 +48,9 @@ Single Evaluation will process just the latest operation and return the resultan
 | Remainder | % | y % x | 11 3 % | 2 |
 | Percent | *num*% | x percent of y | 500 10% + | 550 |
 | Percentage | perc | The percentage x is from y | 1000 670 perc | 67 |
+| Floating Percentage | percf | Floating percentage x is from y | 1000 670 percf | 0.67 |
+| Percentage and Round | percd | Rounded value d decimals percentage x is from y | 1000 675.38 2 percd | 67.54 |
+
 
 ## Math Operations
 | Operation | Operator | Description | Example | Result |

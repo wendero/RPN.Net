@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 
 namespace RPN.Examples
 {
@@ -12,6 +16,16 @@ namespace RPN.Examples
         private static int _success = 0;
         static void Main(string[] args)
         {
+            //var loggerFactory = LoggerFactory.Create(builder =>
+            //{
+            //    builder.AddConsole().SetMinimumLevel(LogLevel.Debug);
+            //});
+            //ILogger logger = loggerFactory.CreateLogger<Program>();
+
+            //logger.LogError("This is log message.");
+            //Thread.Sleep(1000);
+            //return;
+
             if (args.Length == 0)
             {
                 ShowExamples();
@@ -42,6 +56,9 @@ namespace RPN.Examples
             Test("Percent", "500 10% +", 550);
             Test("Percent", "500 20% -", 400);
             Test("Percentage", "1000 670 perc", 67);
+            Test("Floating Percentage", "1000 670 percf", 0.67);
+            Test("Percentage and Round", "1000 675.38 2 percd", 67.54);
+
 
             /******************************************/
             /** MATH OPERATIONS
@@ -90,8 +107,8 @@ namespace RPN.Examples
             Test("Uppercase", "bazinga ucase", "BAZINGA");
             Test("Lowercase", "BAZINGA lcase", "bazinga");
             Test("String Format", "hel wor lo ld `{0}{2} {1}{3}` strfmt", "hello world");
-            Test("Date Default Format", "2020 12 31 15 16 17 6 date default datefmt","2020-12-31 15:16:17");
-            Test("Date Custom Format", "2020 12 31 15 16 17 6 date `dd/MM/yyyy HH:mm:ss` datefmt","31/12/2020 15:16:17");
+            Test("Date Default Format", "2020 12 31 15 16 17 6 date default datefmt", "2020-12-31 15:16:17");
+            Test("Date Custom Format", "2020 12 31 15 16 17 6 date `dd/MM/yyyy HH:mm:ss` datefmt", "31/12/2020 15:16:17");
             Test("Date System Format", "2018 12 31 23 59 58 123 7 date str", new DateTime(2018, 12, 31, 23, 59, 58).ToString());
             Test("Parse JSON", "`{\"Name\": \"Bazinga\"}` parse $0.Name", "Bazinga");
             Test("Parse JSON", "`{\"Key\":123}` parse $0.Key", 123);
@@ -201,7 +218,7 @@ namespace RPN.Examples
             /** REGEX OPERATIONS
             /******************************************/
             Test("Regex Match", @"`telefone: 371-8333 555-8888 321-4001 bazinga` rx/\d{3}\-\d{4}/ match $0[0].Value", "371-8333");
-            
+
             Summary();
         }
         static void Test(string name, string exp, dynamic expected)

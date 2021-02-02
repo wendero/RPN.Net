@@ -13,6 +13,8 @@ namespace RPN.Tests
         [TestCase("Percent", "500 10% +", 550)]
         [TestCase("Percent", "500 20% -", 400)]
         [TestCase("Percentage", "1000 670 perc", 67)]
+        [TestCase("Floating Percentage", "1000 670 percf", 0.67)]
+        [TestCase("Percentage and Round", "1000 675.38 2 percd", 67.54)]
         public void TestBasicOperations(string testName, string expression, dynamic expectedValue, params object[] objects)
         {
             Test(testName, expression, expectedValue, objects);
