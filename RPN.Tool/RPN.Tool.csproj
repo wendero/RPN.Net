@@ -29,8 +29,8 @@
     <PackageProjectUrl>https://github.com/wendero/RPN.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wendero/RPN.Net</RepositoryUrl>
     <PackageTags>rpn c# dotnet core tool</PackageTags>
-    <Version>1.2.1</Version>
-    <PackageReleaseNotes>Includes RPN.Net 1.2.1</PackageReleaseNotes>
+    <Version>1.2.3</Version>
+    <PackageReleaseNotes>Includes RPN.Net 1.2.3</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>

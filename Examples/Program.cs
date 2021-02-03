@@ -58,6 +58,17 @@ namespace RPN.Examples
             Test("Percentage", "1000 670 perc", 67);
             Test("Floating Percentage", "1000 670 percf", 0.67);
             Test("Percentage and Round", "1000 675.38 2 percd", 67.54);
+            Test("Difference Minimum", "1000 1000 diff", 0);
+            Test("Difference Maximum Positive", "0 1000 diff", 100);
+            Test("Difference Maximum Negative", "0 -1000 diff", -100);
+            Test("Difference Lesser", "1000 600 diff", -40);
+            Test("Difference Greater", "1000 1400 diff", 40);
+            Test("Floating Difference Minimum", "1000 1000 difff", 0);
+            Test("Floating Difference Maximum Positive", "0 1000 difff", 1);
+            Test("Floating Difference Maximum Negative", "0 -1000 difff", -1);
+            Test("Floating Difference Lesser", "1000 600 difff", -0.4);
+            Test("Floating Difference Greater", "1000 1400 difff", 0.4);
+            Test("Difference and Round", "10 pi 2 diffd", -68.58);
 
 
             /******************************************/
