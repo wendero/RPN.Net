@@ -11,8 +11,8 @@
 A easy way to include external logic into your projects.</Description>
     <PackageProjectUrl>https://github.com/wendero/RPN.Net</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wendero/RPN.Net</RepositoryUrl>
-    <Version>1.2.3</Version>
-    <Copyright>Copyright © Wender Oliveira 2021</Copyright>
+    <Version>1.2.4</Version>
+    <Copyright>Copyright © Wender Oliveira 2023</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>rpn c# dotnet core</PackageTags>
     <PackageReleaseNotes>- Added diff, diffd and difff</PackageReleaseNotes>
@@ -22,7 +22,7 @@ A easy way to include external logic into your projects.</Description>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+    <PackageReference Include="System.Text.Json" Version="7.0.3" />
   </ItemGroup>
 
 </Project>
